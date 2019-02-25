@@ -1,0 +1,4 @@
+*.pyc
+.vscode/
+captions/
+video-to-categories/
