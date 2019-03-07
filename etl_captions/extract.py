@@ -10,9 +10,8 @@ def save_captions(file_name, captions):
   text_file.write(captions)
   text_file.close()
 
-def extract_captions():
-  print 'download captions...'
-  video_url = 'https://www.youtube.com/watch?v=glzWNYzPtiY'
+def extract_captions(video_url):
+  print 'downloading captions for: %s' % video_url
   captions = download_captions(video_url)
   save_captions('captions.xml', captions)
 

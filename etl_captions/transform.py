@@ -7,7 +7,7 @@ def extract_captions(file_name):
   for child in root:
     entry = {
       'start': child.attrib['start'],
-      'dur': child.attrib['dur'],
+      'duration': child.attrib['dur'],
       'text': child.text
     }
     captions.append(entry)

@@ -3,9 +3,13 @@ from transform import transform_captions
 from load import save_captions
 
 def run():
-  # extract_captions()
+  video_url = 'https://www.youtube.com/watch?v=glzWNYzPtiY'
+  # extract_captions(video_url)
   captions = transform_captions()
-  save_captions(captions)
+  data = {
+    'captions': captions
+  }
+  save_captions(data)
 
 if __name__ == '__main__':
   run()
