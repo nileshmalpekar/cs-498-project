@@ -1,6 +1,5 @@
 *.pyc
 .vscode/
-captions/
 video-to-categories/
 *.DS_Store
 secrets.txt
