@@ -3,3 +3,7 @@
 video-to-categories/
 *.DS_Store
 secrets.txt
+top_words/mydata/dataset
+top_words/mydata/input
+top_words/mydata/output
+top_words/mydata/export/
