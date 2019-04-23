@@ -8,8 +8,13 @@ from boto3.dynamodb.conditions import Key
 
 API_KEY = os.environ['API_KEY']
 PLAYLIST_ID = os.environ['PLAYLIST_ID']
-MAX_RESULTS = os.environ['MAX_RESULTS'] if 'MAX_RESULTS' in os.environ else 10
+MAX_RESULTS = os.environ['MAX_RESULTS'] if 'MAX_RESULTS' in os.environ else '10'
 MAX_TRIES = os.environ['MAX_TRIES'] if 'MAX_TRIES' in os.environ else 1
+
+YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%%2CcontentDetails&maxResults=%s&playlistId=%s&key=%s"
+VIDEO_URL = 'https://www.youtube.com/watch?v=%s'
+
+LANG = 'es'
 
 def get_thumbnail(item):
   if 'standard' in item['snippet']['thumbnails']:
@@ -25,17 +30,23 @@ def get_thumbnail(item):
 def youtube_transformer(response):
   videos = []
   for item in response['items']:
+    videoId = item['snippet']['resourceId']['videoId']
+    title = item['snippet']['title']
+    created = item['contentDetails']['videoPublishedAt']
+    thumbnail = get_thumbnail(item)
+    print("VideoId:%s,Title:%s" % (videoId, title))
+
     videos.append({
-      'videoId': item['snippet']['resourceId']['videoId'],
-      'title': item['snippet']['title'],
-      'created': item['contentDetails']['videoPublishedAt'],
-      'thumbnail': get_thumbnail(item)
+      'videoId': videoId,
+      'title': title,
+      'created': created,
+      'thumbnail': thumbnail
     })
+
   return videos
 
 def get_videos_from_youtube(pageToken = ''):
-  print '...downloading videos for page %s' % pageToken
-  youtube_url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=" + str(MAX_RESULTS) + "&playlistId=" + PLAYLIST_ID + "&key=" + API_KEY
+  youtube_url = YOUTUBE_URL % (MAX_RESULTS, PLAYLIST_ID, API_KEY)
 
   if pageToken:
     youtube_url += '&pageToken=%s' % pageToken
@@ -59,17 +70,21 @@ def striphtml(data):
   return p.sub('', data)
 
 def get_captions(video):
-  video_url = 'https://www.youtube.com/watch?v=%s' % video['videoId']
+  video_url = VIDEO_URL % video['videoId']
+
   source = YouTube(video_url)
-  captions = source.captions.get_by_language_code('es')
+  captions = source.captions.get_by_language_code(LANG)
 
   if captions and captions.xml_captions:
-    file_name = 'captions/%s_%s.txt' % (video['created'].split('T')[0], video['videoId'])
+    file_name = 'captions/%s_%s.txt' % (video['videoId'], LANG)
     captions_file = open(file_name, 'w')
-    print '...saving captions: %s' % file_name
     root = ET.fromstring(captions.xml_captions)
     for child in root:
       captions_file.write("%s\t%s\t%s\n" % (child.attrib['start'], child.attrib['dur'], striphtml(child.text)))
+    print("Created caption file %s" % file_name)
+    return True
+  else:
+    return False
 
 def save_videos(videos):
   dynamodb = boto3.resource('dynamodb',
@@ -86,13 +101,9 @@ def save_videos(videos):
       KeyConditionExpression=Key('videoId').eq(video['videoId'])
     )
     if response['Count'] == 0:
-      get_captions(video)
-
-      table.put_item(
-        TableName='videos',
-        Item=video
-      )
-      new_videos_count += 1
+      if get_captions(video):
+        table.put_item(TableName='videos',Item=video)
+        new_videos_count += 1
 
   return new_videos_count
 
@@ -103,12 +114,11 @@ def create_directory():
 
 def run():
   videos = get_videos()
-  print "%s videos found ..." % len(videos)
+  print("Total %s videos found ..." % len(videos))
 
   create_directory()
   new_videos_count = save_videos(videos)
-
-  #print '%s new videos found...' % new_videos_count
+  print("Total %s new videos found with captions ..." % new_videos_count)
 
 if __name__ == '__main__':
   run()

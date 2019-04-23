@@ -1,6 +1,4 @@
-FROM python:2.7-jessie
-
-RUN apt-get update && apt-get -y upgrade
+FROM python:3.7-alpine3.9
 
 COPY ./requirements.txt .
 
