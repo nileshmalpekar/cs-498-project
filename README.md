@@ -1,32 +1,28 @@
 # ETL for Youtube Captions
 
-This code helps to download captions from youtube video API and save them locally.
+This code helps to download captions from YouTube using YouTube Data API and save them locally in a dynamodb instance.
 
-## 1. Setup DynamoDB Locally
+We use Docker and Docker-Compose to ensure that the environment is reproducible. Please make sure you have both Docker and Docker Compose installed on your local machine before proceeding further.
 
-For this part we are going to use docker.
+## 1. Build docker image
 
-### Download dynamodb docker image
+```bash
+$./build_docker_image.sh
+```
 
-`docker pull amazon/dynamodb-local`
+## 2. Create tables in local dynamodb instance
 
-### Starting Dynamodb docker proccess
+```bash
+$./create_tables.sh
+```
 
-`docker run -dp 8000:8000 amazon/dynamodb-local`
+## 3. Download captions
 
-## 2. Create `videos` Table
+In order to download video captions using Google YouTube Data api, you'll need to get an API key from google. Please refer to [YouTube Data API Overview](https://developers.google.com/youtube/v3/getting-started)
 
-Execute script:
-
-`python etl_captions/create-table.py`
-
-## 3. Download videos Caption :)
-
-You need to get a [Google API KEY](https://developers.google.com/maps/documentation/javascript/get-api-key)
-
-Once you get your key, run following command:
-
-`API_KEY=[YOUR_API_KEY] python etl_captions/main.py`
+```bash
+$./download_captions.sh [API_KEY] [PLAYLIST_ID]
+```
 
 This will save captions inside `./captions` folder.
 

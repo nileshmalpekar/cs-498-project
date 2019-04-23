@@ -7,9 +7,9 @@ import xml.etree.ElementTree as ET
 from boto3.dynamodb.conditions import Key
 
 API_KEY = os.environ['API_KEY']
-PLAYLIST_ID = 'PL-wEE8VmWaJ3BoPk-jxOrjOp711iP_Oqg'
-MAX_RESULTS = 10
-MAX_TRIES = 1
+PLAYLIST_ID = os.environ['PLAYLIST_ID']
+MAX_RESULTS = os.environ['MAX_RESULTS'] if 'MAX_RESULTS' in os.environ else 10
+MAX_TRIES = os.environ['MAX_TRIES'] if 'MAX_TRIES' in os.environ else 1
 
 def get_thumbnail(item):
   if 'standard' in item['snippet']['thumbnails']:
@@ -51,7 +51,7 @@ def get_videos(step = 0, pageToken = ''):
 
   if next_token or step < MAX_TRIES:
     videos += get_videos(step + 1, next_token)
-  
+
   return videos
 
 def striphtml(data):
@@ -63,15 +63,20 @@ def get_captions(video):
   source = YouTube(video_url)
   captions = source.captions.get_by_language_code('es')
 
-  file_name = 'captions/%s_%s.txt' % (video['created'].split('T')[0], video['videoId'])
-  captions_file = open(file_name, 'w')
-  print '...saving captions: %s' % file_name
-  root = ET.fromstring(captions.xml_captions)
-  for child in root:
-    captions_file.write("%s\t%s\t%s\n" % (child.attrib['start'], child.attrib['dur'], striphtml(child.text)))
+  if captions and captions.xml_captions:
+    file_name = 'captions/%s_%s.txt' % (video['created'].split('T')[0], video['videoId'])
+    captions_file = open(file_name, 'w')
+    print '...saving captions: %s' % file_name
+    root = ET.fromstring(captions.xml_captions)
+    for child in root:
+      captions_file.write("%s\t%s\t%s\n" % (child.attrib['start'], child.attrib['dur'], striphtml(child.text)))
 
 def save_videos(videos):
-  dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000/')
+  dynamodb = boto3.resource('dynamodb',
+    endpoint_url=os.environ['DYNAMO_ENDPOINT'],
+    region_name=os.environ['AWS_REGION_NAME'],
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 
   table = dynamodb.Table('videos')
   new_videos_count = 0
@@ -88,7 +93,7 @@ def save_videos(videos):
         Item=video
       )
       new_videos_count += 1
-  
+
   return new_videos_count
 
 def create_directory():
@@ -103,7 +108,7 @@ def run():
   create_directory()
   new_videos_count = save_videos(videos)
 
-  print '%s new videos found...' % new_videos_count
+  #print '%s new videos found...' % new_videos_count
 
 if __name__ == '__main__':
   run()

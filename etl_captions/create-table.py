@@ -1,8 +1,13 @@
 import boto3
+from os import environ
 
 def create_table():
-  dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000')
-  
+  dynamodb = boto3.resource('dynamodb',
+    endpoint_url=environ['DYNAMO_ENDPOINT'],
+    region_name=environ['AWS_REGION_NAME'],
+    aws_access_key_id=environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=environ['AWS_SECRET_ACCESS_KEY'])
+
   table = dynamodb.create_table(
     TableName='videos',
     KeySchema=[
