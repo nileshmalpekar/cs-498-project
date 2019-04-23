@@ -76,13 +76,17 @@ def striphtml(data):
 
 
 def get_captions(video):
+    file_name = 'captions/%s_%s.txt' % (video['videoId'], LANG)
+    if os.path.isfile(file_name):
+        print("Captions already present in file %s" % file_name)
+        return True
+
     video_url = VIDEO_URL % video['videoId']
 
     source = YouTube(video_url)
     captions = source.captions.get_by_language_code(LANG)
 
     if captions and captions.xml_captions:
-        file_name = 'captions/%s_%s.txt' % (video['videoId'], LANG)
         captions_file = open(file_name, 'w')
         root = ET.fromstring(captions.xml_captions)
         for child in root:
@@ -113,10 +117,12 @@ def save_videos(videos):
         response = table.query(
             KeyConditionExpression=Key('videoId').eq(video['videoId'])
         )
-        if response['Count'] == 0:
-            if get_captions(video):
+        if get_captions(video):
+            if response['Count'] == 0:
                 table.put_item(TableName='videos', Item=video)
-                new_videos_count += 1
+            new_videos_count += 1
+        else:
+            print('Video %s captions not found' % video['videoId'])
 
     return new_videos_count
 
@@ -133,7 +139,7 @@ def run():
 
     create_directory()
     new_videos_count = save_videos(videos)
-    print("Total %s new videos found with captions ..." % new_videos_count)
+    print("Total %s videos found with captions ..." % new_videos_count)
 
 
 if __name__ == '__main__':
