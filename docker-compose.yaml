@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  dynamo:
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000"
+  etl:
+    image: "cs498_cca:latest"
+    working_dir: /app
+    environment:
+      DYNAMO_ENDPOINT: "http://dynamo:8000"
+      AWS_ACCESS_KEY_ID: "foo"
+      AWS_SECRET_ACCESS_KEY: "bar"
+      AWS_REGION_NAME: "us-east-1"
+    depends_on:
+      - dynamo
+    links:
+      - "dynamo:dynamo"
+    volumes:
+      - ./:/app
