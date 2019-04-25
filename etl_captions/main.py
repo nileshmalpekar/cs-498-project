@@ -82,7 +82,7 @@ def get_captions(video):
         return True
 
     video_url = VIDEO_URL % video['videoId']
-
+    print(video_url)
     source = YouTube(video_url)
     captions = source.captions.get_by_language_code(LANG)
 
