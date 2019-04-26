@@ -40,7 +40,15 @@ The number of results whenever hitting youtube api (max value 50).
 
 Maximum number of hits made to Youtube API (this is to avoid infinite loops).
 
+#### Creating an unsupervised model
 
+##### Topic modeling
+
+In order to build two separate (LDA, LSI) models
+
+```bash
+$./build_topic_model.sh
+```
 
 #### Dynamodb Queries
 

@@ -82,7 +82,6 @@ def get_captions(video):
         return True
 
     video_url = VIDEO_URL % video['videoId']
-    print(video_url)
     source = YouTube(video_url)
     captions = source.captions.get_by_language_code(LANG)
 
@@ -114,10 +113,10 @@ def save_videos(videos):
     new_videos_count = 0
 
     for video in videos:
-        response = table.query(
-            KeyConditionExpression=Key('videoId').eq(video['videoId'])
-        )
         if get_captions(video):
+            response = table.query(
+                KeyConditionExpression=Key('videoId').eq(video['videoId'])
+            )
             if response['Count'] == 0:
                 table.put_item(TableName='videos', Item=video)
             new_videos_count += 1
@@ -127,8 +126,7 @@ def save_videos(videos):
     return new_videos_count
 
 
-def create_directory():
-    directory_name = 'captions'
+def create_directory(directory_name = 'captions'):
     if not os.path.exists(directory_name):
         os.makedirs(directory_name)
 
