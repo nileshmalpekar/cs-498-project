@@ -1,26 +1,37 @@
 import glob
 import re
+import sys
 from gensim import models, corpora
 
 import nltk
 nltk.download('cess_esp')
 nltk.download('stopwords')
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
-from nltk import word_tokenize
+from nltk import word_tokenize, pos_tag
 from nltk.corpus import stopwords
 
 # YouTube captions format
 # start duration text
 line_re = re.compile(r"^(?:\d+(?:\.\d+)?\s+)+(.+)$")
 
-NUM_TOPICS = 10
-STOPWORDS = stopwords.words('spanish')
+NUM_TOPICS = int(sys.argv[1]) if len(sys.argv) > 1 else 2
+NUM_WORDS_IN_TOPIC = 10
+
+# Need to update this to ensure that we ignore the words of low interest
+extra_stop_words = ['entonces', 'presidente', 'gobierno', 'ser', 'nacional', 'hacer', 'vamos']
+STOPWORDS = stopwords.words('spanish') + extra_stop_words
 
 def clean_text(text):
-    tokenized_text = word_tokenize(text.lower())
-    cleaned_text = [t for t in tokenized_text if t not in STOPWORDS and re.match(r"[a-zA-Z\-][a-zA-Z\-]{2,}", t)]
-    return cleaned_text
+	is_noun = lambda pos: pos[:2] == 'NN'
+	is_noun_adj = lambda pos: pos[:2] == 'NN' or pos[:2] == 'JJ'
+
+	tokenized_text = word_tokenize(text.lower())
+	all_nouns = [word for (word, pos) in pos_tag(tokenized_text) if is_noun_adj(pos)]
+
+	cleaned_text = [t for t in all_nouns if t not in STOPWORDS and re.match(r"[a-zA-Z\-][a-zA-Z\-]{2,}", t)]
+	return cleaned_text
 
 def get_data():
 	docs = []
@@ -45,28 +56,21 @@ def run():
 	# Build a Dictionary - association word to numeric id
 	dictionary = corpora.Dictionary(tokenized_data)
 
+	print("Dictionary")
+	for (id, word) in dictionary.id2token:
+		print(id, word)
+
 	# Transform the collection of texts to a numerical form
 	corpus = [dictionary.doc2bow(text) for text in tokenized_data]
 
 	# Build the LDA model
-	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary)
-
-	# Build the LSI model
-	lsi_model = models.LsiModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary)
+	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
 
 	print("LDA Model:")
 
 	for idx in range(NUM_TOPICS):
 		# Print the first 10 most representative topics
-		print("Topic #%s:" % idx, lda_model.print_topic(idx, 10))
-
-	print("=" * 20)
-
-	print("LSI Model:")
-
-	for idx in range(NUM_TOPICS):
-		# Print the first 10 most representative topics
-		print("Topic #%s:" % idx, lsi_model.print_topic(idx, 10))
+		print("Topic #%s:" % idx, lda_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
 
 	print("=" * 20)
 
@@ -78,25 +82,6 @@ def run():
 	print(topics)
 	topic_id = sorted(topics, key=lambda item: -item[1])[0]
 	print(topic_id)
-
-	topics = lsi_model[bow]
-	print(topics)
-	topic_id = sorted(topics, key=lambda item: -item[1])[0]
-	print(topic_id)
-
-	# from gensim import similarities
-
-	# lda_index = similarities.MatrixSimilarity(lda_model[corpus])
-
-	# similarities = lda_index[lda_model[bow]]
-
-	# Sort the similarities
-	# similarities = sorted(enumerate(similarities), key=lambda item: -item[1])
-
-	# Top most similar documents:
-	# print(similarities[:10])
-	# Let's see what's the most similar document
-	#document_id, similarity = similarities[0]
 
 if __name__ == '__main__':
     run()

@@ -42,6 +42,36 @@ Maximum number of hits made to Youtube API (this is to avoid infinite loops).
 
 #### Creating an unsupervised model
 
+##### Explore data
+
+We would like to find out what words occur in various transcriptions and which ones are relevant to the NLP based unsupervised learning.
+
+In order to work towards the same, we first launch the jupyter notebook
+
+```bash
+$./explore_topic_models.sh
+```
+
+This will show on the console URL which can be used to connect with the notebook
+
+```
+[I 00:22:05.940 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 00:22:08.484 NotebookApp] Serving notebooks from local directory: /app/notebooks
+[I 00:22:08.484 NotebookApp] The Jupyter Notebook is running at:
+[I 00:22:08.484 NotebookApp] http://(2e118104df80 or 127.0.0.1):8080/?token=28d18090a6c3ddfe2bf364b471cbc7ab70c7cadfe53231b2
+[I 00:22:08.485 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 00:22:08.493 NotebookApp] No web browser found: could not locate runnable browser.
+[C 00:22:08.493 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-1-open.html
+    Or copy and paste one of these URLs:
+        http://(2e118104df80 or 127.0.0.1):8080/?token=28d18090a6c3ddfe2bf364b471cbc7ab70c7cadfe53231b2
+```
+
+Use the URL to access the notebook and open test1.ipynb from notebooks folder.
+
+
 ##### Topic modeling
 
 In order to build two separate (LDA, LSI) models

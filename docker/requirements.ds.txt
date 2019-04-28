@@ -7,3 +7,5 @@ gensim
 spacy
 pyLDAvis
 paramiko
+jupyter
+google-api-python-client
