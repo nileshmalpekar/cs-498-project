@@ -20,8 +20,8 @@ NUM_TOPICS = int(sys.argv[1]) if len(sys.argv) > 1 else 2
 NUM_WORDS_IN_TOPIC = 10
 
 # Need to update this to ensure that we ignore the words of low interest
-extra_stop_words = ['entonces', 'presidente', 'gobierno', 'ser', 'nacional', 'hacer', 'vamos']
-STOPWORDS = stopwords.words('spanish') + extra_stop_words
+EXTRA_STOP_WORDS = ['entonces', 'ser', 'nacional', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
+STOPWORDS = stopwords.words('spanish') + EXTRA_STOP_WORDS
 
 def clean_text(text):
 	is_noun = lambda pos: pos[:2] == 'NN'
