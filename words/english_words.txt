@@ -1,0 +1,728 @@
+"entonces","so",2006
+"pues","well",1503
+"presidente","President",1425
+"gobierno","government",1223
+"ser","be",1078
+"hacer","do",920
+"bueno","good",918
+"mil","thousand",838
+"tener","to have",830
+"caso","case",785
+"nacional","national",783
+"millones","millions",781
+"tema","topic",774
+"ver","watch",774
+"vamos","we go",748
+"aquí","here",705
+"bien","all right",699
+"federal","federal",685
+"gracias","Thank you",682
+"información","information",679
+"dos","two",650
+"ustedes","your",638
+"poder","power",607
+"general","general",596
+"corrupción","corruption",585
+"ahora","now",582
+"importante","important",577
+"decir","tell",575
+"parte","part",573
+"mismo","same",568
+"ayer","Yesterday",567
+"buenos","good ones",541
+"tiempo","weather",538
+"hace","make",526
+"plan","plan",525
+"dar","give",514
+"gente","people",497
+"haciendo","doing",492
+"muchas","many",467
+"puede","can",458
+"haber","to have",457
+"hoy","today",454
+"conocer","know",453
+"problema","problem",449
+"toda","all",432
+"presupuesto","budget",423
+"luego","then",415
+"pueblo","village",405
+"van","go",385
+"sistema","system",385
+"combustible","gas",381
+"programa","Program",380
+"queremos","we want",378
+"trabajo","work",375
+"usted","you",374
+"todas","all",367
+"cabo","cape",361
+"quiero","I want",358
+"cada","every",358
+"pemex","pemex",352
+"solo","single",351
+"pregunta","Question",351
+"creo","I think",349
+"secretario","secretary",348
+"proceso","process",341
+"además","also",329
+"ciudadanos","citizens",325
+"cosas","things",318
+"política","politics",316
+"siempre","forever",313
+"elementos","elements",306
+"apoyo","support for",304
+"personas","people",304
+"ejemplo","example",302
+"primero","First",301
+"dinero","money",301
+"mayor","higher",296
+"preguntarle","ask him",295
+"recursos","resources",294
+"ductos","ducts",293
+"compromiso","commitment",289
+"mejor","best",284
+"dice","He says",281
+"vez","time",275
+"casos","cases",273
+"seguir","follow",272
+"mexicanos","Mexicans",271
+"sido","been",264
+"trabajando","working",262
+"robo","Stole",259
+"podemos","we can",259
+"humanos","humans",259
+"social","Social",256
+"gran","great",253
+"incluso","even",253
+"trabajadores","workers",251
+"derechos","rights",250
+"sino","if not",248
+"momento","moment",245
+"primera","first",244
+"saber","to know",243
+"tres","three",243
+"empresas","Business",242
+"pesos","pesos",241
+"tipo","kind",239
+"ciento","hundred",239
+"algún","some",239
+"acerca","about",237
+"propósito","purpose",237
+"personal","personal",235
+"todavía","still",234
+"seguridad","security",233
+"favor","favor",233
+"partir","split",232
+"hecho","fact",230
+"situación","situation",229
+"existe","exists",226
+"menos","less",226
+"veces","times",225
+"sector","sector",225
+"través","through",225
+"manera","way",223
+"hablando","talking",223
+"reforma","reform",221
+"pueden","they can",219
+"cambio","change",217
+"atender","attend",217
+"después","after",210
+"derecho","straight",209
+"respeto","respect",209
+"puedo","may l",208
+"comisión","commission",207
+"garantizar","to guarantee",204
+"medios","media",202
+"director","director",198
+"hizo","did",197
+"debe","should",196
+"cuenta","account",196
+"forma","shape",196
+"alguna","any",195
+"contratos","contracts",194
+"claro","Clear",193
+"informe","report",193
+"nadie","no one",191
+"maestros","teachers",189
+"neoliberal","neoliberal",187
+"sociales","social",187
+"informar","report",185
+"investigación","investigation",184
+"acuerdo","agreement",183
+"podría","might",183
+"mucha","a lot",183
+"puedan","can",181
+"nuevo","new",181
+"pasado","past",179
+"hablar","talk",177
+"buena","good",177
+"hacia","toward",175
+"barriles","barrels",174
+"primer","first",172
+"funcionarios","officials",171
+"inversión","investment",170
+"bienestar","wellness",169
+"precisamente","precisely",168
+"acciones","Actions",166
+"falta","lack",165
+"pueda","I can",164
+"mujeres","women",164
+"posible","possible",163
+"decía","He said",163
+"cosa","thing",163
+"presentar","present",162
+"nunca","never",162
+"aunque","even though",161
+"nivel","level",161
+"programas","programs",159
+"sigue","follow",158
+"gobiernos","governments",158
+"tan","so",158
+"temas","themes",158
+"dicho","saying",157
+"gobernador","governor",157
+"medio","medium",156
+"resolver","solve",154
+"preguntas","questions",154
+"alrededor","around",154
+"nueva","new",153
+"voy","I go",152
+"ayudar","help",152
+"datos","data",152
+"cualquier","any",151
+"seguro","safe",150
+"comunicación","communication",149
+"eeuu","USA",148
+"entregar","deliver",147
+"cargo","position",146
+"responsabilidad","responsibility",143
+"mal","wrong",143
+"problemas","problems",143
+"grupo","group",143
+"proyecto","draft",143
+"judicial","judicial",143
+"final","final",142
+"lado","side",141
+"adelante","ahead",140
+"municipios","municipalities",140
+"lugar","place",139
+"embargo","embargo",138
+"ningún","no",138
+"hicieron","made",137
+"respecto","respect",137
+"civil","civil",137
+"significa","it means",137
+"buscar","search for",135
+"evitar","avoid",135
+"instituto","Institute",135
+"decisión","decision",133
+"particular","particular",133
+"legal","legal",133
+"especial","special",133
+"justicia","Justice",132
+"mantener","keep",132
+"dije","said",132
+"precios","prices",132
+"mexicano","Mexican",131
+"empresa","company",130
+"pasar","happen",130
+"horas","hours",130
+"relación","relationship",130
+"constitución","Constitution",129
+"segundo","second",129
+"pueblos","villages",129
+"segunda","second",128
+"quisiera","I would like",128
+"recibir","to receive",128
+"tomar","drink",128
+"total","total",127
+"fin","finish",127
+"pedir","ask",126
+"dijo","He said",125
+"salario","salary",125
+"servicio","service",124
+"transformación","transformation",123
+"desarrollo","developing",123
+"condiciones","terms",123
+"cuatro","four",123
+"ducto","pipeline",123
+"ninguna","any",122
+"cierto","true",122
+"poner","put",122
+"cuanto","how much",122
+"centro","center",121
+"trata","about",121
+"promedio","average",121
+"saben","you know",121
+"periodo","period",120
+"crecimiento","increase",120
+"delito","crime",120
+"investigaciones","research",119
+"delitos","offenses",119
+"permitir","allow",119
+"instituciones","institutions",117
+"mundo","world",116
+"baja","low",116
+"actuar","Act",116
+"dio","it gave",116
+"cumplir","comply",116
+"combustibles","fuels",115
+"solamente","only",115
+"petróleo","Petroleum",113
+"fiscal","fiscal",113
+"organizaciones","organizations",113
+"llevar","wear",112
+"terminar","finish",112
+"pipas","pipes",112
+"siendo","being",111
+"precio","price",111
+"buen","good",110
+"trabajar","to work",110
+"quién","who",110
+"constitucional","constitutional",109
+"dicen","they say",109
+"reunión","meeting",108
+"atención","Attention",108
+"arriba","above",108
+"igual","same",107
+"digo","I say",107
+"buscando","searching",107
+"instalaciones","facilities",107
+"darle","give him",107
+"punto","point",106
+"toma","taking",106
+"tiempos","time",105
+"campo","field",105
+"lunes","Monday",105
+"opinión","opinion",105
+"podamos","we can",104
+"dando","giving",104
+"acabar","finish",104
+"económico","economic",104
+"transparencia","transparency",104
+"adultos","Adults",104
+"asunto","affair",103
+"internacional","international",103
+"resultados","results",103
+"allá","there",103
+"mes","month",103
+"periodistas","journalists",102
+"fiscalía","prosecution",102
+"regiones","regions",102
+"avance","Advance",101
+"postura","position",100
+"mecanismo","mechanism",100
+"pagar","pay",100
+"agua","Water",100
+"homicidios","homicides",99
+"espero","I hope",99
+"comunidades","communities",99
+"vemos","we see",99
+"dejar","leave",98
+"viendo","seeing",98
+"lograr","achieve",98
+"hacen","make",98
+"tal","such",98
+"consulta","query",98
+"tratar","try",98
+"base","base",98
+"hechos","acts",97
+"permite","It allows",96
+"coordinación","coordination",96
+"suficiente","enough",96
+"apoyar","support",96
+"ley","law",95
+"perdón","sorry",95
+"corresponde","corresponds",95
+"mayores","greater",95
+"universidades","colleges",94
+"finalmente","Finally",94
+"participar","take part",94
+"enfrentar","deal",93
+"dado","dice",93
+"campaña","Bell",93
+"impunidad","impunity",93
+"control","control",93
+"territorio","territory",92
+"fondo","background",92
+"idea","idea",92
+"aeropuerto","airport",92
+"gobernadores","governors",92
+"utilizar","use",92
+"extranjero","Foreign",91
+"respuesta","answer",91
+"gas","gas",90
+"meses","months",90
+"semana","week",90
+"haga","make",90
+"llegar","arrive",90
+"militar","military",89
+"consejo","advice",89
+"clandestinas","clandestine",89
+"hidalgo","gentleman",88
+"congreso","congress",88
+"migrantes","migrants",88
+"principal","principal",88
+"seis","six",87
+"repito","I repeat",87
+"cantidad","quantity",87
+"pasa","pass",87
+"bajo","low",87
+"zona","zone",87
+"cuidar","look after",86
+"fundamental","fundamental",86
+"gustaría","would like",86
+"capacidad","capacity",85
+"completo","full",85
+"ciudad","city",85
+"servicios","services",85
+"quieren","they want",85
+"función","function",85
+"discapacidad","disability",85
+"helicóptero","helicopter",85
+"autoridades","authorities",85
+"quedar","stay",84
+"supuesto","supposed",84
+"grupos","groups",84
+"ambiente","ambient",83
+"propuesta","proposal",83
+"miren","look",83
+"digamos","let say",83
+"puntos","points",83
+"confianza","trust",83
+"presente","I presented",83
+"sabe","knows",83
+"hospitales","hospitals",83
+"etapa","stage",82
+"democracia","democracy",82
+"comunicaciones","communications",82
+"casi","almost",82
+"actual","current",82
+"viene","comes",81
+"comprar","to buy",81
+"mejorar","to get better",81
+"estatales","state",81
+"orden","order",81
+"dentro","inside",81
+"imagínense","imagine yourself",81
+"siquiera","even",81
+"partes","parts",81
+"grandes","big",81
+"pasó","He passed",80
+"comentar","comment",80
+"denuncias","complaints",80
+"fuerza","force",80
+"estrategia","strategy",80
+"informarles","inform them",79
+"ciudadano","citizen",79
+"fondos","money",79
+"mercado","market",79
+"aumentar","increase",79
+"diario","daily",79
+"llama","call",79
+"partido","match",79
+"sabemos","we know",78
+"gusto","taste",78
+"revisar","check",78
+"cambiar","change",78
+"gabinete","cabinet",78
+"hicimos","we did",78
+"camino","path",78
+"abajo","down",78
+"acción","action",78
+"abasto","supply",78
+"directa","direct",77
+"atendiendo","attending",77
+"actividades","activities",77
+"pronto","soon",77
+"anterior","previous",77
+"realidad","reality",77
+"financiera","financial",77
+"atrás","behind",76
+"planteando","raising",76
+"siguiente","following",76
+"mismos","same",76
+"hectáreas","hectares",76
+"fortalecer","strengthen",75
+"decidir","decide",75
+"palabra","word",75
+"municipales","municipal",75
+"realmente","Really",75
+"policía","police",75
+"pudiera","I could",75
+"informando","informing",75
+"coordinaciones","coordinations",74
+"hacerlo","do what",74
+"políticos","politicians",74
+"relaciones","relations",74
+"asuntos","affairs",73
+"pesar","to weigh",73
+"institución","institution",73
+"dato","fact",73
+"cultura","culture",73
+"viernes","Friday",73
+"conocimiento","knowledge",73
+"presencia","presence",73
+"vida","lifetime",72
+"necesitamos","we need",72
+"avanzando","going forward",72
+"población","population",72
+"miles","Thousands",72
+"ejecutivo","executive",72
+"permanente","permanent",71
+"actividad","activity",71
+"naciones","nations",71
+"apoyos","props",71
+"diciendo","saying",71
+"servidores","servers",71
+"california","California",71
+"administración","administration",71
+"carlos","Charles",71
+"duda","doubt",71
+"frontera","border",70
+"preguntar","ask",70
+"político","politician",70
+"nuevos","new",70
+"ahorita","right now",70
+"visto","viewed",70
+"banco","Bank",70
+"debemos","we must",69
+"salir","go out",69
+"familias","families",69
+"principios","beginning",69
+"jefe","boss",69
+"empleos","jobs",69
+"gasolinas","gasolines",69
+"denuncia","complaint",69
+"construir","build",69
+"cambios","changes",69
+"gasolina","gasoline",69
+"continuar","continue",68
+"contrato","contract",68
+"paz","peace",68
+"interés","interest",68
+"reporte","report",68
+"decirles","tell them",68
+"secretaria","Secretary",68
+"cinco","five",68
+"pensando","thinking",67
+"pendiente","pending",67
+"bienes","goods",66
+"necesario","necessary",66
+"puebla","puebla",66
+"habla","speaks",66
+"termina","ends",66
+"acaba","just",66
+"radio","radio",66
+"redes","networks",66
+"modelo","model",66
+"principio","beginning",65
+"hacemos","we make",65
+"combate","combat",65
+"hablaba","he spoke",65
+"razón","reason",65
+"millón","million",65
+"queda","remains",65
+"conferencia","conference",65
+"jesús","Jesus",64
+"sucedió","it happened",64
+"federales","federal",64
+"mejores","top",64
+"persona","person",64
+"paso","He passed",64
+"crear","create",64
+"empresarios","businessmen",64
+"contrario","contrary",64
+"superior","higher",64
+"ayudando","Helping",64
+"debate","debate",64
+"construcción","building",64
+"periodista","journalist",64
+"familia","family",63
+"tijuana","tijuana",63
+"alejandro","Alexander",63
+"contar","tell",63
+"importa","import",63
+"exteriores","exterior",63
+"llamado","called",63
+"comentaba","I was commenting",63
+"senado","senate",63
+"diarios","newspapers",63
+"bosque","forest",63
+"abrir","open",62
+"violencia","violence",62
+"actuando","acting",62
+"cuidado","watch out",62
+"nombre","first name",62
+"actos","acts",62
+"producción","production",62
+"casa","home",62
+"sexenio","sexenio",62
+"instrucción","instruction",62
+"bastante","quite",62
+"explicar","explain",62
+"educación","education",62
+"opciones","options",62
+"pasando","going",62
+"autoridad","authority",62
+"impuestos","taxes",61
+"electoral","electoral",61
+"conservadores","conservatives",61
+"familiares","relatives",61
+"financiero","financial",61
+"gobernacion","governance",61
+"fuerzas","forces",61
+"doctor","doctor",61
+"jalisco","jalisco",61
+"protección","protection",60
+"cuarta","quarter",60
+"riesgo","risk",60
+"común","common",60
+"periódico","Newspaper",60
+"infantiles","children",60
+"pruebas","tests",60
+"libertad","freedom",60
+"intervención","intervention",60
+"responsable","responsable",60
+"cerca","near",60
+"integral","integral",60
+"aclarar","clear out",60
+"largo","long",60
+"salud","Health",60
+"ayuden","help",60
+"manuel","Manuel",59
+"respetar","respect",59
+"valores","values",59
+"hacienda","estate",59
+"demás","the rest",59
+"pensión","pension",59
+"posibilidad","possibility",59
+"serie","series",59
+"fecha","date",59
+"servidor","server",58
+"mire","Look",58
+"tren","train",58
+"organización","organization",58
+"interior","inside",58
+"diputados","deputies",58
+"planta","plant",58
+"mensuales","monthly",58
+"crisis","crisis",58
+"infonavit","infonavit",58
+"altos","tall",57
+"interesante","interesting",57
+"inclusive","inclusive",57
+"unas","nail",57
+"iniciar","Start",57
+"internacionales","international",57
+"subsecretario","undersecretary",57
+"instrucciones","instructions",57
+"hablamos","We speak",57
+"tampoco","neither",57
+"tomas","shots",57
+"acto","act",56
+"sucediendo","happening",56
+"concesiones","concessions",56
+"medicamentos","medicines",56
+"decreto","decree",56
+"hijos","children",56
+"establece","establishes",56
+"según","according",56
+"carta","letter",56
+"censo","census",56
+"equipo","team",56
+"varios","various",56
+"conflicto","conflict",56
+"primeros","first",56
+"futuro","future",55
+"aplicar","Apply",55
+"tercera","third",55
+"venido","I come",55
+"oficial","official",55
+"cumpliendo","fulfilling",55
+"hice","I did",55
+"terreno","ground",55
+"lleva","carries",55
+"combatir","fight",55
+"curso","course",55
+"exterior","Exterior",55
+"incremento","increase",55
+"dan","dan",54
+"quería","wanted to",54
+"seguramente","surely",54
+"veracruz","veracruz",54
+"trump","trump",54
+"energía","Energy",54
+"esperar","wait",54
+"terminamos","finished",54
+"marco","framework",54
+"esfuerzo","effort",54
+"policías","policemen",54
+"padres","parents",54
+"claridad","clarity",54
+"dictamen","opinion",54
+"aviones","planes",53
+"corruptos","corrupt",53
+"sindicatos","unions",53
+"conjunta","joint",53
+"revisión","revision",53
+"uso","use",53
+"bases","bases",53
+"justamente","justly",53
+"tranquilidad","tranquility",53
+"organismos","organisms",53
+"unidades","units",53
+"proteger","to protect",52
+"cuestiones","issues",52
+"moral","moral",52
+"calderón","pilot",52
+"sacar","take",52
+"historia","history",52
+"propio","own",52
+"sueldos","salaries",52
+"funciones","functions",52
+"plazo","term",52
+"estaciones","seasons",52
+"sureste","southeast",52
+"ciudades","cities",52
+"cuales","which",52
+"decisiones","decisions",51
+"sociedad","society",51
+"comentarles","tell them",51
+"compra","purchase",51
+"podía","I could",51
+"sur","south",51
+"privado","private",51
+"deben","must",51
+"mencionó","he mentioned",51
+"iniciativa","initiative",51
+"llega","arrives",51
+"ingresos","income",51
+"podríamos","we could",51
+"tomando","taking",51
+"ciudadana","citizen",51
+"refinería","refinery",51
+"hacía","toward",51
+"hablado","spoken",51
+"tarea","homework",51
+"procesos","processes",51
+"calidad","quality",51
+"particulares","particular",51
+"hospital","hospital",51
+"tierra","land",51
+"cerrar","close",50
+"realizar","perform",50
+"buenas","good",50
+"unidos","United",50
+"cero","zero",50
+"lamentable","regrettable",50
+"usar","use",50
+"nombres","Name (s",50
+"hagan","make",50
+"difícil","hard",50
+"leyes","laws",50
+"empezar","start",50
+"actualmente","at present",50
+"conservadurismo","conservatism",50
+"normal","normal",50
+"verdad","true",50
+"afortunadamente","Fortunately",50

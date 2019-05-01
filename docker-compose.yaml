@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
   etl:
-    image: "cs498_cca:latest"
+    image: "cs498_etl:latest"
     working_dir: /app
     environment:
       DYNAMO_ENDPOINT: "http://dynamo:8000"
