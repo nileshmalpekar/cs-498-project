@@ -17,7 +17,7 @@ from nltk.corpus import stopwords
 line_re = re.compile(r"^(?:\d+(?:\.\d+)?\s+)+(.+)$")
 
 NUM_TOPICS = int(sys.argv[1]) if len(sys.argv) > 1 else 2
-NUM_WORDS_IN_TOPIC = 10
+NUM_WORDS_IN_TOPIC = int(sys.argv[2]) if len(sys.argv) > 2 else 5
 
 # Need to update this to ensure that we ignore the words of low interest
 EXTRA_STOP_WORDS = ['entonces', 'ser', 'nacional', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
@@ -36,6 +36,7 @@ def clean_text(text):
 def get_data():
 	docs = []
 	for file in glob.glob("./captions/*_es.txt"):
+		# capture video id here
 		with open(file) as fp:
 			file_lines = []
 			for line in fp:
@@ -56,32 +57,34 @@ def run():
 	# Build a Dictionary - association word to numeric id
 	dictionary = corpora.Dictionary(tokenized_data)
 
-	print("Dictionary")
-	for (id, word) in dictionary.id2token:
-		print(id, word)
-
 	# Transform the collection of texts to a numerical form
 	corpus = [dictionary.doc2bow(text) for text in tokenized_data]
+
+	#
+	tfidf = models.TfidfModel(corpus)
 
 	# Build the LDA model
 	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
 
 	print("LDA Model:")
 
+	topic_words = []
 	for idx in range(NUM_TOPICS):
 		# Print the first 10 most representative topics
 		print("Topic #%s:" % idx, lda_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
+		topic_words.append([dictionary[word[0]] for word in lda_model.get_topic_terms(idx, NUM_WORDS_IN_TOPIC)])
+		# for word in lda_model.get_topic_terms(idx, NUM_WORDS_IN_TOPIC):
+		# 	print("\t", word, dictionary[word[0]])
 
 	print("=" * 20)
 
-	text = "hacemos un llamado a todo el pueblo a la"
-	bow = dictionary.doc2bow(clean_text(text))
-
-	# Let's perform some queries
-	topics = lda_model[bow]
-	print(topics)
-	topic_id = sorted(topics, key=lambda item: -item[1])[0]
-	print(topic_id)
+	for text in docs:
+		bow = dictionary.doc2bow(clean_text(text))
+		# Let's perform some queries
+		topics = lda_model.get_document_topics(bow)
+		#print(topics)
+		topic_id = sorted(topics, key=lambda item: -item[1])[0]
+		print(topic_words[topic_id[0]])
 
 if __name__ == '__main__':
     run()
