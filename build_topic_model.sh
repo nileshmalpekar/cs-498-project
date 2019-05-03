@@ -1,6 +1,6 @@
 # build topic model
 NUM_TOPICS=${1:-2}
-NUM_WORDS_IN_TOPIC=${1:-5}
+NUM_WORDS_IN_TOPIC=${2:-5}
 docker run -it \
 	-v ${PWD}:/app \
 	-w /app \
