@@ -73,17 +73,29 @@ def run():
 
 	#
 	tfidf = models.TfidfModel(corpus)
+	corpus_tfidf = tfidf[corpus]
+
+	lsi_model = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=NUM_TOPICS)
+
+	print("LSI Model:")
+	for idx in range(NUM_TOPICS):
+		# Print the first 10 most representative topics
+		print("Topic #%s:" % idx, lsi_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
+
+	topic_words_lsi = [[word for word, _ in lsi_model.show_topic(idx, NUM_WORDS_IN_TOPIC)]for idx in range(NUM_TOPICS)]
+
+	print("=" * 20)
 
 	# Build the LDA model
 	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
 
 	print("LDA Model:")
 
-	topic_words = []
 	for idx in range(NUM_TOPICS):
 		# Print the first 10 most representative topics
 		print("Topic #%s:" % idx, lda_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
-		topic_words.append([dictionary[word[0]] for word in lda_model.get_topic_terms(idx, NUM_WORDS_IN_TOPIC)])
+
+	topic_words_lda = [ [word for word, _ in lda_model.show_topic(idx, NUM_WORDS_IN_TOPIC)] for idx in range(NUM_TOPICS)]
 
 	print("=" * 20)
 
@@ -95,7 +107,11 @@ def run():
 			topics = lda_model.get_document_topics(bow)
 			#print(topics)
 			topic_id = sorted(topics, key=lambda item: -item[1])[0]
-			output_writer.writerow([text[0], ",".join(topic_words[topic_id[0]])])
+			output_writer.writerow([text[0], ",".join(topic_words_lda[topic_id[0]])])
+			topics = lsi_model[tfidf[bow]]
+			topic_id = sorted(topics, key=lambda item: -item[1])[0]
+			output_writer.writerow([text[0], ",".join(topic_words_lsi[topic_id[0]])])
+
 
 if __name__ == '__main__':
     run()
