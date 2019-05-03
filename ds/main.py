@@ -1,6 +1,8 @@
 import glob
 import re
 import sys
+import csv
+
 from gensim import models, corpora
 
 import nltk
@@ -17,8 +19,10 @@ from nltk.corpus import stopwords
 LINE_RE = re.compile(r"^(?:\d+(?:\.\d+)?\s+)+(.+)$")
 FILENAME_RE = re.compile(r'^\./captions/(.+)?_es\.txt$', re.I)
 
-NUM_TOPICS = int(sys.argv[1]) if len(sys.argv) > 1 else 2
-NUM_WORDS_IN_TOPIC = int(sys.argv[2]) if len(sys.argv) > 2 else 5
+argc = len(sys.argv)
+NUM_TOPICS = int(sys.argv[1]) if argc > 1 else 2
+NUM_WORDS_IN_TOPIC = int(sys.argv[2]) if argc > 2 else 5
+OUTPUT_FILE= sys.argv[3] if argc > 3 else "output.csv"
 
 # Need to update this to ensure that we ignore the words of low interest
 EXTRA_STOP_WORDS = ['entonces', 'ser', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
@@ -83,13 +87,15 @@ def run():
 
 	print("=" * 20)
 
-	for text in docs:
-		bow = dictionary.doc2bow(clean_text(text[1]))
-		# Let's perform some queries
-		topics = lda_model.get_document_topics(bow)
-		#print(topics)
-		topic_id = sorted(topics, key=lambda item: -item[1])[0]
-		print("%s,%s" % (text[0], ",".join(topic_words[topic_id[0]])))
+	with open(OUTPUT_FILE, mode='w') as output_file:
+		output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+		for text in docs:
+			bow = dictionary.doc2bow(clean_text(text[1]))
+			# Let's perform some queries
+			topics = lda_model.get_document_topics(bow)
+			#print(topics)
+			topic_id = sorted(topics, key=lambda item: -item[1])[0]
+			output_writer.writerow([text[0], ",".join(topic_words[topic_id[0]])])
 
 if __name__ == '__main__':
     run()
