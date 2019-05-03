@@ -59,6 +59,28 @@ def get_data():
 def get_tokenized_data(data):
 	return [clean_text(text[1]) for text in data]
 
+def get_lda_model(corpus, dictionary):
+	return models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
+
+def get_lsi_model(corpus, dictionary):
+	return models.LsiModel(corpus, id2word=dictionary, num_topics=NUM_TOPICS)
+
+def get_topic_words(model):
+	topic_words = [[word for word, _ in model.show_topic(idx, NUM_WORDS_IN_TOPIC)]for idx in range(NUM_TOPICS)]
+	return topic_words
+
+def print_model(model, name):
+	print("Model %s" % name)
+	for idx in range(NUM_TOPICS):
+		# Print the first 10 most representative topics
+		print("Topic #%s:" % idx, model.print_topic(idx, NUM_WORDS_IN_TOPIC))
+	print("=" * 20)
+
+def infer_topic_words(model, vector, topic_words):
+	topics = model[vector]
+	topic_id = sorted(topics, key=lambda item: -item[1])[0]
+	return topic_words[topic_id[0]]
+
 def run():
 	docs = get_data()
 
@@ -75,42 +97,28 @@ def run():
 	tfidf = models.TfidfModel(corpus)
 	corpus_tfidf = tfidf[corpus]
 
-	lsi_model = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=NUM_TOPICS)
-
-	print("LSI Model:")
-	for idx in range(NUM_TOPICS):
-		# Print the first 10 most representative topics
-		print("Topic #%s:" % idx, lsi_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
-
-	topic_words_lsi = [[word for word, _ in lsi_model.show_topic(idx, NUM_WORDS_IN_TOPIC)]for idx in range(NUM_TOPICS)]
-
-	print("=" * 20)
+	lsi_model = get_lsi_model(corpus_tfidf, dictionary)
+	topic_words_lsi = get_topic_words(lsi_model)
+	print_model(lsi_model, "LSI")
 
 	# Build the LDA model
-	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
+	# lda_model = get_lda_model(corpus, dictionary)
+	# topic_words_lda = get_topic_words(lda_model)
+	# print_model(lda_model, "LDA")
 
-	print("LDA Model:")
-
-	for idx in range(NUM_TOPICS):
-		# Print the first 10 most representative topics
-		print("Topic #%s:" % idx, lda_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
-
-	topic_words_lda = [ [word for word, _ in lda_model.show_topic(idx, NUM_WORDS_IN_TOPIC)] for idx in range(NUM_TOPICS)]
-
-	print("=" * 20)
-
+	# Inference
 	with open(OUTPUT_FILE, mode='w') as output_file:
 		output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 		for text in docs:
 			bow = dictionary.doc2bow(clean_text(text[1]))
+			bow_tfidf = tfidf[bow]
+
 			# Let's perform some queries
-			topics = lda_model.get_document_topics(bow)
-			#print(topics)
-			topic_id = sorted(topics, key=lambda item: -item[1])[0]
-			output_writer.writerow([text[0], ",".join(topic_words_lda[topic_id[0]])])
-			topics = lsi_model[tfidf[bow]]
-			topic_id = sorted(topics, key=lambda item: -item[1])[0]
-			output_writer.writerow([text[0], ",".join(topic_words_lsi[topic_id[0]])])
+			# words = infer_topic_words(lda_model, bow, topic_words_lda)
+			# output_writer.writerow([text[0], ",".join(words)])
+
+			words = infer_topic_words(lsi_model, bow_tfidf, topic_words_lsi)
+			output_writer.writerow([text[0], ",".join(words)])
 
 
 if __name__ == '__main__':
