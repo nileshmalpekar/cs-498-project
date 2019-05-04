@@ -18,3 +18,19 @@ services:
       - "dynamo:dynamo"
     volumes:
       - ./:/app
+  api:
+    image: "cs498_api:latest"
+    ports:
+      - "5000:5000"
+    working_dir: /app
+    environment:
+      DYNAMO_ENDPOINT: "http://dynamo:8000"
+      AWS_ACCESS_KEY_ID: "foo"
+      AWS_SECRET_ACCESS_KEY: "bar"
+      AWS_REGION_NAME: "us-east-1"
+    depends_on:
+      - dynamo
+    links:
+      - "dynamo:dynamo"
+    volumes:
+      - ./api:/app
