@@ -5,6 +5,11 @@
 - DynamoDB DB schema to be updated
 	- store video ID, video tags
 
+- ETL script
+	- two files
+		- txn file CSV file
+			"videoId", "list of words"
+
 - Create a small front-end (REST API endpoint)
 	- Given one or more keywords
 	- Returns (JSON) a list of matching videos

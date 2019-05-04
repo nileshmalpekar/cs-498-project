@@ -118,7 +118,8 @@ def run():
 			# output_writer.writerow([text[0], ",".join(words)])
 
 			words = infer_topic_words(lsi_model, bow_tfidf, topic_words_lsi)
-			output_writer.writerow([text[0], ",".join(words)])
+			for word in words:
+				output_writer.writerow([word, text[0]])
 
 
 if __name__ == '__main__':
