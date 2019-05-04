@@ -32,7 +32,7 @@ def create_table():
             {
                 'AttributeName': 'created',
                 'AttributeType': 'S'
-            },
+            }
         ],
         ProvisionedThroughput={
             'ReadCapacityUnits': 5,

@@ -4,6 +4,11 @@ services:
     image: amazon/dynamodb-local
     ports:
       - "8000:8000"
+    volumes:
+      - $PWD/data:/data
+    command: '-jar DynamoDBLocal.jar -port 8000 -sharedDb -dbPath /data'
+    volumes:
+      - ./data:/data
   etl:
     image: "cs498_etl:latest"
     working_dir: /app

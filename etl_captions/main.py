@@ -32,25 +32,24 @@ def get_thumbnail(item):
 def youtube_transformer(response):
     videos = []
     for item in response['items']:
-        videoId = item['snippet']['resourceId']['videoId']
-        title = item['snippet']['title']
-        created = item['contentDetails']['videoPublishedAt']
-        thumbnail = get_thumbnail(item)
-        print("VideoId:%s,Title:%s" % (videoId, title))
+        if 'videoPublishedAt' in item['contentDetails']:
+            videoId = item['snippet']['resourceId']['videoId']
+            title = item['snippet']['title']
+            created = item['contentDetails']['videoPublishedAt']
+            thumbnail = get_thumbnail(item)
 
-        videos.append({
-            'videoId': videoId,
-            'title': title,
-            'created': created,
-            'thumbnail': thumbnail
-        })
+            videos.append({
+                'videoId': videoId,
+                'title': title,
+                'created': created,
+                'thumbnail': thumbnail
+            })
 
     return videos
 
 
 def get_videos_from_youtube(pageToken=''):
     youtube_url = YOUTUBE_URL % (MAX_RESULTS, PLAYLIST_ID, API_KEY)
-
     if pageToken:
         youtube_url += '&pageToken=%s' % pageToken
 
@@ -64,7 +63,7 @@ def get_videos(step=0, pageToken=''):
     videos = youtube_transformer(response)
     next_token = response['nextPageToken'] if 'nextPageToken' in response else False
 
-    if next_token or step < MAX_TRIES:
+    if next_token and step < MAX_TRIES:
         videos += get_videos(step + 1, next_token)
 
     return videos
@@ -75,13 +74,14 @@ def striphtml(data):
     return p.sub('', data)
 
 
-def get_captions(video):
+def download_captions(video):
     file_name = 'captions/%s_%s.txt' % (video['videoId'], LANG)
     if os.path.isfile(file_name):
         print("Captions already present in file %s" % file_name)
         return True
 
     video_url = VIDEO_URL % video['videoId']
+    print("download captions for: %s" % video_url)
     source = YouTube(video_url)
     captions = source.captions.get_by_language_code(LANG)
 
@@ -113,7 +113,7 @@ def save_videos(videos):
     new_videos_count = 0
 
     for video in videos:
-        if get_captions(video):
+        if download_captions(video):
             response = table.query(
                 KeyConditionExpression=Key('videoId').eq(video['videoId'])
             )
