@@ -1,5 +1,19 @@
 # ETL for Youtube Captions
 
+## TODO
+
+- DynamoDB DB schema to be updated
+	- store video ID, video tags
+
+- Create a small front-end (REST API endpoint)
+	- Given one or more keywords
+	- Returns (JSON) a list of matching videos
+
+- make sure that the topics are meaningful
+
+- Finalize the project report
+
+
 This code helps to download captions from YouTube using YouTube Data API and save them locally in a dynamodb instance.
 
 We use Docker and Docker-Compose to ensure that the environment is reproducible. Please make sure you have both Docker and Docker Compose installed on your local machine before proceeding further.

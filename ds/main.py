@@ -1,6 +1,8 @@
 import glob
 import re
 import sys
+import csv
+
 from gensim import models, corpora
 
 import nltk
@@ -14,13 +16,16 @@ from nltk.corpus import stopwords
 
 # YouTube captions format
 # start duration text
-line_re = re.compile(r"^(?:\d+(?:\.\d+)?\s+)+(.+)$")
+LINE_RE = re.compile(r"^(?:\d+(?:\.\d+)?\s+)+(.+)$")
+FILENAME_RE = re.compile(r'^\./captions/(.+)?_es\.txt$', re.I)
 
-NUM_TOPICS = int(sys.argv[1]) if len(sys.argv) > 1 else 2
-NUM_WORDS_IN_TOPIC = 10
+argc = len(sys.argv)
+NUM_TOPICS = int(sys.argv[1]) if argc > 1 else 2
+NUM_WORDS_IN_TOPIC = int(sys.argv[2]) if argc > 2 else 5
+OUTPUT_FILE= sys.argv[3] if argc > 3 else "output.csv"
 
 # Need to update this to ensure that we ignore the words of low interest
-EXTRA_STOP_WORDS = ['entonces', 'ser', 'nacional', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
+EXTRA_STOP_WORDS = ['entonces', 'ser', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
 STOPWORDS = stopwords.words('spanish') + EXTRA_STOP_WORDS
 
 def clean_text(text):
@@ -36,16 +41,45 @@ def clean_text(text):
 def get_data():
 	docs = []
 	for file in glob.glob("./captions/*_es.txt"):
-		with open(file) as fp:
-			file_lines = []
-			for line in fp:
-				m = line_re.match(line)
-				file_lines.append(m.group(1))
-			docs.append(' '.join(file_lines))
+		# capture video id here
+		m = FILENAME_RE.search(file)
+		if m:
+			videoId = m.group(1)
+			with open(file) as fp:
+				file_lines = []
+				for line in fp:
+					m = LINE_RE.match(line)
+					file_lines.append(m.group(1))
+				docs.append((videoId, ' '.join(file_lines)))
+		else:
+			print("Invalid file format %s" % file)
+			sys.exit(-1)
 	return docs
 
 def get_tokenized_data(data):
-	return [clean_text(text) for text in data]
+	return [clean_text(text[1]) for text in data]
+
+def get_lda_model(corpus, dictionary):
+	return models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
+
+def get_lsi_model(corpus, dictionary):
+	return models.LsiModel(corpus, id2word=dictionary, num_topics=NUM_TOPICS)
+
+def get_topic_words(model):
+	topic_words = [[word for word, _ in model.show_topic(idx, NUM_WORDS_IN_TOPIC)]for idx in range(NUM_TOPICS)]
+	return topic_words
+
+def print_model(model, name):
+	print("Model %s" % name)
+	for idx in range(NUM_TOPICS):
+		# Print the first 10 most representative topics
+		print("Topic #%s:" % idx, model.print_topic(idx, NUM_WORDS_IN_TOPIC))
+	print("=" * 20)
+
+def infer_topic_words(model, vector, topic_words):
+	topics = model[vector]
+	topic_id = sorted(topics, key=lambda item: -item[1])[0]
+	return topic_words[topic_id[0]]
 
 def run():
 	docs = get_data()
@@ -56,32 +90,36 @@ def run():
 	# Build a Dictionary - association word to numeric id
 	dictionary = corpora.Dictionary(tokenized_data)
 
-	print("Dictionary")
-	for (id, word) in dictionary.id2token:
-		print(id, word)
-
 	# Transform the collection of texts to a numerical form
 	corpus = [dictionary.doc2bow(text) for text in tokenized_data]
 
+	#
+	tfidf = models.TfidfModel(corpus)
+	corpus_tfidf = tfidf[corpus]
+
+	lsi_model = get_lsi_model(corpus_tfidf, dictionary)
+	topic_words_lsi = get_topic_words(lsi_model)
+	print_model(lsi_model, "LSI")
+
 	# Build the LDA model
-	lda_model = models.LdaModel(corpus=corpus, num_topics=NUM_TOPICS, id2word=dictionary, passes=100, chunksize=5)
+	# lda_model = get_lda_model(corpus, dictionary)
+	# topic_words_lda = get_topic_words(lda_model)
+	# print_model(lda_model, "LDA")
 
-	print("LDA Model:")
+	# Inference
+	with open(OUTPUT_FILE, mode='w') as output_file:
+		output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+		for text in docs:
+			bow = dictionary.doc2bow(clean_text(text[1]))
+			bow_tfidf = tfidf[bow]
 
-	for idx in range(NUM_TOPICS):
-		# Print the first 10 most representative topics
-		print("Topic #%s:" % idx, lda_model.print_topic(idx, NUM_WORDS_IN_TOPIC))
+			# Let's perform some queries
+			# words = infer_topic_words(lda_model, bow, topic_words_lda)
+			# output_writer.writerow([text[0], ",".join(words)])
 
-	print("=" * 20)
+			words = infer_topic_words(lsi_model, bow_tfidf, topic_words_lsi)
+			output_writer.writerow([text[0], ",".join(words)])
 
-	text = "hacemos un llamado a todo el pueblo a la"
-	bow = dictionary.doc2bow(clean_text(text))
-
-	# Let's perform some queries
-	topics = lda_model[bow]
-	print(topics)
-	topic_id = sorted(topics, key=lambda item: -item[1])[0]
-	print(topic_id)
 
 if __name__ == '__main__':
     run()
