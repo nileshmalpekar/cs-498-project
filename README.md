@@ -8,6 +8,15 @@
 
 - [ ] make sure that the topics are meaningful
 
+- ETL script
+	- two files
+		- txn file CSV file
+			"videoId", "list of words"
+
+- Create a small front-end (REST API endpoint)
+	- Given one or more keywords
+	- Returns (JSON) a list of matching videos
+
 - [ ] Finalize the project report
 
 
