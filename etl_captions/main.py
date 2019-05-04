@@ -8,8 +8,8 @@ from boto3.dynamodb.conditions import Key
 
 API_KEY = os.environ['API_KEY']
 PLAYLIST_ID = os.environ['PLAYLIST_ID']
-MAX_RESULTS = os.environ['MAX_RESULTS'] if 'MAX_RESULTS' in os.environ else '10'
-MAX_TRIES = os.environ['MAX_TRIES'] if 'MAX_TRIES' in os.environ else 1
+MAX_RESULTS = os.environ['MAX_RESULTS'] if 'MAX_RESULTS' in os.environ else '50'
+MAX_TRIES = os.environ['MAX_TRIES'] if 'MAX_TRIES' in os.environ else 10
 
 YOUTUBE_URL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%%2CcontentDetails&maxResults=%s&playlistId=%s&key=%s"
 VIDEO_URL = 'https://www.youtube.com/watch?v=%s'
@@ -81,7 +81,7 @@ def download_captions(video):
         return True
 
     video_url = VIDEO_URL % video['videoId']
-    print("download captions for: %s" % video_url)
+    print("downloading captions for: %s" % video_url)
     source = YouTube(video_url)
     captions = source.captions.get_by_language_code(LANG)
 

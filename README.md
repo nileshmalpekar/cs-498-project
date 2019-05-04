@@ -2,16 +2,13 @@
 
 ## TODO
 
-- DynamoDB DB schema to be updated
-	- store video ID, video tags
+- [ ] Create a small front-end (REST API endpoint)
+    - Given one or more keywords
+    - Returns (JSON) a list of matching videos
 
-- Create a small front-end (REST API endpoint)
-	- Given one or more keywords
-	- Returns (JSON) a list of matching videos
+- [ ] make sure that the topics are meaningful
 
-- make sure that the topics are meaningful
-
-- Finalize the project report
+- [ ] Finalize the project report
 
 
 This code helps to download captions from YouTube using YouTube Data API and save them locally in a dynamodb instance.
@@ -21,13 +18,13 @@ We use Docker and Docker-Compose to ensure that the environment is reproducible.
 ## 1. Build docker image
 
 ```bash
-$./build_docker_image.sh
+$./scripts/build_docker_image.sh
 ```
 
 ## 2. Create tables in local dynamodb instance
 
 ```bash
-$./create_tables.sh
+$./scripts/create_tables.sh
 ```
 
 ## 3. Download captions
@@ -35,7 +32,7 @@ $./create_tables.sh
 In order to download video captions using Google YouTube Data api, you'll need to get an API key from google. Please refer to [YouTube Data API Overview](https://developers.google.com/youtube/v3/getting-started)
 
 ```bash
-$./download_captions.sh [API_KEY] [PLAYLIST_ID]
+$./scripts/download_captions.sh [API_KEY] [PLAYLIST_ID]
 ```
 
 This will save captions inside `./captions` folder.
@@ -63,7 +60,7 @@ We would like to find out what words occur in various transcriptions and which o
 In order to work towards the same, we first launch the jupyter notebook
 
 ```bash
-$./explore_topic_models.sh
+$./scripts/explore_topic_models.sh
 ```
 
 This will show on the console URL which can be used to connect with the notebook
@@ -91,10 +88,21 @@ Use the URL to access the notebook and open test1.ipynb from notebooks folder.
 In order to build two separate (LDA, LSI) models
 
 ```bash
-$./build_topic_model.sh
+$./scripts/build_topic_model.sh
+```
+
+#### Set Videos topics
+
+This will use the output from *Topics modeling* (video_id:topics) and update videos table.
+Ideally each video will have its own topics
+
+```bash
+$./scripts/set_topics.sh
 ```
 
 #### Dynamodb Queries
+
+note: [AWS-cli](https://aws.amazon.com/cli/) needs to be installed and dynamodb running.
 
 - List Tables
 
