@@ -41,7 +41,6 @@ def youtube_transformer(response):
                 thumbnail = get_thumbnail(snippet['thumbnails'])
             else:
                 thumbnail = None
-
         if 'contentDetails' in item:
             contentDetails = item['contentDetails']
             videoId = contentDetails['videoId'] if 'videoId' in contentDetails else None

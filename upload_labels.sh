@@ -2,6 +2,7 @@
 if [ "$#" -eq 0 ]; then
 	docker-compose run \
 		--rm \
+		-e DYNAMO_ENDPOINT=http://dynamo:8000 \
 		etl \
 		python ./etl_captions/upload_labels.py ./output.csv
 elif [ "$#" -eq 2 ]; then
