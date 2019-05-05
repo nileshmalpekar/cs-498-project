@@ -19,13 +19,27 @@ VIDEO_URL = 'https://www.youtube.com/watch?v=%s'
 LANG = 'es'
 
 
+def get_thumbnail(thumbnails):
+    if 'standard' in thumbnails:
+        return thumbnails['standard']['url']
+    if 'high' in thumbnails:
+        return thumbnails['high']['url']
+    if 'medium' in thumbnails:
+        return thumbnails['medium']['url']
+    if 'default' in thumbnails:
+        return thumbnails['default']['url']
+    return ''
+
 def youtube_transformer(response):
     videos = []
     for item in response['items']:
         if 'snippet' in item:
             snippet = item['snippet']
             title = snippet['title'] if 'title' in snippet else 'TITLE_NOT_FOUND'
-
+            if 'thumbnails' in snippet:
+                thumbnail = get_thumbnail(snippet['thumbnails'])
+            else:
+                thumbnail = None
         if 'contentDetails' in item:
             contentDetails = item['contentDetails']
             videoId = contentDetails['videoId'] if 'videoId' in contentDetails else None
@@ -39,7 +53,8 @@ def youtube_transformer(response):
         videos.append({
             'videoId': videoId,
             'title': title,
-            'created': created
+            'created': created,
+            'thumbnail': thumbnail
         })
 
     return videos

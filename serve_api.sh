@@ -2,6 +2,7 @@
 if [ "$#" -eq 0 ]; then
 	docker-compose run \
 		--rm \
+		-e DYNAMO_ENDPOINT=http://dynamo:8000 \
 		-p 5000:5000 \
 		api \
 		python ./app.py

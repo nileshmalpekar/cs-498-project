@@ -4,6 +4,7 @@ if [ "$#" -le 2 ]; then
 	PLAYLIST_ID=${2:-"PL-wEE8VmWaJ3BoPk-jxOrjOp711iP_Oqg"}
 	docker-compose run \
 		--rm \
+		-e DYNAMO_ENDPOINT=http://dynamo:8000 \
 		-e API_KEY=$API_KEY \
 		-e PLAYLIST_ID=$PLAYLIST_ID \
 		etl \
