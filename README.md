@@ -117,10 +117,10 @@ Use the URL to access the notebook and open test1.ipynb from notebooks folder.
 
 ##### Topic modeling
 
-In order to build two separate (LDA, LSI) models
+In order to build TFIDF based LSI model
 
 ```bash
-$./build_topic_model.sh
+$./build_topic_model.sh [NUM_TOPICS] [NUM_WORDS_IN_TOPIC]
 ```
 
 #### Dynamodb Queries
