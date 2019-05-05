@@ -118,7 +118,7 @@ Use the URL to access the notebook and open test1.ipynb from notebooks folder.
 
 ##### Topic modeling
 
-In order to build two separate (LDA, LSI) models
+In order to build TFIDF based LSI model
 
 ```bash
 $./scripts/build_topic_model.sh
@@ -130,6 +130,8 @@ This will use the output from *Topics modeling* (video_id:topics) and update vid
 Ideally each video will have its own topics
 
 ```bash
+$./build_topic_model.sh [NUM_TOPICS] [NUM_WORDS_IN_TOPIC]
+
 $./scripts/set_topics.sh
 ```
 

@@ -13,10 +13,9 @@ services:
     image: "cs498_etl:latest"
     working_dir: /app
     environment:
-      DYNAMO_ENDPOINT: "http://dynamo:8000"
+      AWS_REGION_NAME: "us-east-1"
       AWS_ACCESS_KEY_ID: "foo"
       AWS_SECRET_ACCESS_KEY: "bar"
-      AWS_REGION_NAME: "us-east-1"
     depends_on:
       - dynamo
     links:
