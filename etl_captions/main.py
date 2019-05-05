@@ -87,7 +87,7 @@ def striphtml(data):
     return p.sub('', data)
 
 
-def download_captions(video):
+def get_captions(video):
     file_name = 'captions/%s_%s.txt' % (video['videoId'], LANG)
     if os.path.isfile(file_name):
         print("Captions already present in file %s" % file_name)
@@ -134,7 +134,7 @@ def save_videos(videos):
     new_videos_count = 0
 
     for video in videos:
-        if download_captions(video):
+        if get_captions(video):
             response = table.query(
                 KeyConditionExpression=Key('videoId').eq(video['videoId'])
             )

@@ -4,7 +4,7 @@ if [ "$#" -eq 0 ]; then
 		--rm \
 		-e DYNAMO_ENDPOINT=http://dynamo:8000 \
 		etl \
-		python ./etl_captions/upload_labels.py ./output.csv
+		python ./etl_captions/upload_labels.py ./output_label.csv
 elif [ "$#" -eq 2 ]; then
 	docker run \
 		--rm \
@@ -15,7 +15,7 @@ elif [ "$#" -eq 2 ]; then
 		-v ${PWD}:/app \
 		-w /app \
 		cs498_etl:latest \
-		python ./etl_captions/upload_labels.py ./output.csv
+		python ./etl_captions/upload_labels.py ./output_label.csv
 else
 	echo "Usage: ./upload_labels.sh [[AWSAccessKeyId] [AWSSecretKey]]"
 fi

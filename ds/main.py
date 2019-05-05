@@ -22,7 +22,7 @@ FILENAME_RE = re.compile(r'^\./captions/(.+)?_es\.txt$', re.I)
 argc = len(sys.argv)
 NUM_TOPICS = int(sys.argv[1]) if argc > 1 else 2
 NUM_WORDS_IN_TOPIC = int(sys.argv[2]) if argc > 2 else 5
-OUTPUT_FILE= sys.argv[3] if argc > 3 else "output.csv"
+OUTPUT_FILE_PREFIX = sys.argv[3] if argc > 3 else "output"
 
 # Need to update this to ensure that we ignore the words of low interest
 EXTRA_STOP_WORDS = ['entonces', 'ser', 'hacer', 'tener', 'vamos', 'aqui', 'luego', 'dice', 'sido']
@@ -107,20 +107,32 @@ def run():
 	# print_model(lda_model, "LDA")
 
 	# Inference
-	with open(OUTPUT_FILE, mode='w') as output_file:
+	video_topics = []
+	for text in docs:
+		bow = dictionary.doc2bow(clean_text(text[1]))
+		bow_tfidf = tfidf[bow]
+
+		# Let's perform some queries
+		# words = infer_topic_words(lda_model, bow, topic_words_lda)
+		# output_writer.writerow([text[0], ",".join(words)])
+
+		words = infer_topic_words(lsi_model, bow_tfidf, topic_words_lsi)
+		video_topics.append(words)
+
+	with open("%s_video.csv" % OUTPUT_FILE_PREFIX, mode='w') as output_file:
 		output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-		for text in docs:
-			bow = dictionary.doc2bow(clean_text(text[1]))
-			bow_tfidf = tfidf[bow]
 
-			# Let's perform some queries
-			# words = infer_topic_words(lda_model, bow, topic_words_lda)
-			# output_writer.writerow([text[0], ",".join(words)])
+		for i, text in enumerate(docs):
+			words = video_topics[i]
+			output_writer.writerow([text[0], ",".join(words)])
 
-			words = infer_topic_words(lsi_model, bow_tfidf, topic_words_lsi)
+	with open("%s_label.csv" % OUTPUT_FILE_PREFIX, mode='w') as output_file:
+		output_writer = csv.writer(output_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+		for i, text in enumerate(docs):
+			words = video_topics[i]
 			for word in words:
 				output_writer.writerow([word, text[0]])
-
 
 if __name__ == '__main__':
     run()
