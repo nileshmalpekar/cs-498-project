@@ -1,4 +1,5 @@
 import os
+from os import environ
 import re
 import sys
 import requests
@@ -102,12 +103,17 @@ def get_captions(video):
         return False
 
 def save_videos(videos):
-    dynamodb = boto3.resource(
-        'dynamodb',
-        endpoint_url=os.environ['DYNAMO_ENDPOINT'],
-        region_name=os.environ['AWS_REGION_NAME'],
-        aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-        aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+    if 'DYNAMO_ENDPOINT' in environ:
+        dynamodb = boto3.resource(
+            'dynamodb',
+            endpoint_url=environ['DYNAMO_ENDPOINT'],
+            region_name=environ['AWS_REGION_NAME'])
+    else:
+        dynamodb = boto3.resource(
+            'dynamodb',
+            region_name=environ['AWS_REGION_NAME'],
+            aws_access_key_id=environ['AWS_ACCESS_KEY_ID'],
+            aws_secret_access_key=environ['AWS_SECRET_ACCESS_KEY'])
 
     table = dynamodb.Table('videos')
     new_videos_count = 0
