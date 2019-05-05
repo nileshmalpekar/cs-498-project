@@ -15,12 +15,17 @@ def run():
 		print("Usage: ./upload_labels.py [filename]")
 		sys.exit(-1)
 
-	dynamodb = boto3.resource(
-		'dynamodb',
-		endpoint_url=environ['DYNAMO_ENDPOINT'],
-		region_name=environ['AWS_REGION_NAME'],
-		aws_access_key_id=environ['AWS_ACCESS_KEY_ID'],
-		aws_secret_access_key=environ['AWS_SECRET_ACCESS_KEY'])
+	if 'DYNAMO_ENDPOINT' in environ:
+		dynamodb = boto3.resource(
+			'dynamodb',
+			endpoint_url=environ['DYNAMO_ENDPOINT'],
+			region_name=environ['AWS_REGION_NAME'])
+	else:
+		dynamodb = boto3.resource(
+			'dynamodb',
+			region_name=environ['AWS_REGION_NAME'],
+			aws_access_key_id=environ['AWS_ACCESS_KEY_ID'],
+			aws_secret_access_key=environ['AWS_SECRET_ACCESS_KEY'])
 
 	table = dynamodb.Table('video_tags')
 
